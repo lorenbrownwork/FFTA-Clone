@@ -1,0 +1,1 @@
+./Debug/Character.cpp.o ./Debug/Weapon.cpp.o ./Debug/Armor.cpp.o ./Debug/main.cpp.o   
