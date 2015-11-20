@@ -25,10 +25,31 @@ void Character::hurt(Character& character)
     unsigned int physResist = this->armor.getPhysicalResist() * this->toughnes;
     unsigned int magResist = this->armor.getMagicResist() * this->toughnes;
     
+    string magicDefType = this->armor.getMagicType();
+    string magicAtcType = character.getWeapon().getMagicType();
+    
+    string physDefType =this->armor.getPhysicalType();
+    string physAtcType = character.getWeapon().getPhysicalType();
+    
+    //Modify Damage
+    if (magicDefType.compare(magicAtcType)){ //Matching
+        magDamage = magDamage * .5;
+    }else if (magicDefType.compare("Ice")){
+        if (magicAtcType.compare("Electric"))
+            magDamage = magDamage * 1.5;
+    }else if (magicDefType.compare("Fire")){
+        if (magicAtcType.compare("Ice"))
+            magDamage = magDamage * 1.5;
+    }else if (magicDefType.compare("Electric")){
+        if (magicAtcType.compare("Fire"))
+            magDamage = magDamage * 1.5;
+    }
+    
     int actDamage = (physDamage - physResist) + (magDamage - magResist);
     
     cout << actDamage << endl;
     
+    //prevent Negative Health
     if (actDamage > 0) {
         if (this->HP > actDamage) {
             this->HP -= actDamage;
